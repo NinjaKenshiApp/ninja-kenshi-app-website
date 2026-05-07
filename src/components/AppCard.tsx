@@ -1,101 +1,50 @@
-/**
- * AppCard — Tarjeta individual de una app con badges de plataforma,
- * descripción y botones de descarga/más info.
- */
 import { motion } from 'framer-motion'
-import { Download, ExternalLink, Monitor, Smartphone } from 'lucide-react'
-
-interface Platform {
-  label: string
-  type: 'windows' | 'android'
-  href: string
-}
+import { FiArrowUpRight } from 'react-icons/fi'
+import type { AppItem } from '../types/site'
 
 interface AppCardProps {
-  name: string
-  tagline: string
-  description: string
-  badge: string
-  badgeColor: string
-  platforms: Platform[]
-  gradient: string
-  delay?: number
+  app: AppItem
+  onOpen: (app: AppItem) => void
 }
 
-const PlatformIcon = ({ type }: { type: 'windows' | 'android' }) =>
-  type === 'windows' ? <Monitor size={14} /> : <Smartphone size={14} />
-
-export default function AppCard({
-  name,
-  tagline,
-  description,
-  badge,
-  badgeColor,
-  platforms,
-  gradient,
-  delay = 0,
-}: AppCardProps) {
+/*
+Purpose: Compact card with app snapshot and CTA to open modal details.
+Key dependencies: framer-motion for subtle hover/tap transitions.
+Integration: Rendered by AppsShowcase grid.
+*/
+export function AppCard({ app, onOpen }: AppCardProps) {
   return (
     <motion.article
-      initial={{ opacity: 0, y: 24 }}
+      layout
+      initial={{ opacity: 0, y: 18 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay }}
-      whileHover={{ y: -4 }}
-      className="rounded-2xl p-6 border flex flex-col gap-5 cursor-default"
-      style={{
-        background: 'var(--bg-card)',
-        borderColor: 'var(--border)',
-        transition: 'background 0.2s',
-      }}
-      onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--bg-card-hover)')}
-      onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--bg-card)')}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.4 }}
+      className="app-card"
     >
-      {/* Icono / logo placeholder */}
-      <div
-        className="w-14 h-14 rounded-2xl flex items-center justify-center text-white font-bold text-xl"
-        style={{ background: gradient }}
-      >
-        {name.slice(0, 1)}
-      </div>
+      {app.logo ? (
+        <img src={app.logo} alt={`Logo de ${app.name}`} className="app-logo" loading="lazy" />
+      ) : null}
 
-      <div className="flex-1">
-        <div className="flex items-center gap-2 mb-1">
-          <h2 className="text-lg font-semibold" style={{ color: 'var(--text-h)' }}>
-            {name}
-          </h2>
-          <span
-            className="text-xs px-2 py-0.5 rounded-full font-medium"
-            style={{ background: badgeColor + '22', color: badgeColor }}
-          >
-            {badge}
-          </span>
-        </div>
-        <p className="text-sm font-medium mb-2" style={{ color: 'var(--accent-2)' }}>
-          {tagline}
-        </p>
-        <p className="text-sm leading-relaxed" style={{ color: 'var(--text)' }}>
-          {description}
-        </p>
-      </div>
+      <p className="app-status">{app.status}</p>
+      <h3>{app.name}</h3>
+      <p className="app-tagline">{app.tagline}</p>
 
-      {/* Plataformas */}
-      <div className="flex flex-wrap gap-2">
-        {platforms.map((p) => (
-          <a
-            key={p.label}
-            href={p.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg border transition-all hover:opacity-80"
-            style={{ borderColor: 'var(--border)', color: 'var(--text-h)', background: 'rgba(255,255,255,0.04)' }}
-          >
-            <PlatformIcon type={p.type} />
-            {p.label}
-            {p.href !== '#' ? <Download size={11} /> : <ExternalLink size={11} />}
-          </a>
+      <ul className="chip-row" aria-label={`Tecnologias de ${app.name}`}>
+        {app.tech.slice(0, 3).map((tech) => (
+          <li key={tech} className="chip">
+            {tech}
+          </li>
         ))}
-      </div>
+      </ul>
+
+      <button
+        type="button"
+        className="button button-primary app-open"
+        onClick={() => onOpen(app)}
+      >
+        Ver detalles <FiArrowUpRight aria-hidden="true" />
+      </button>
     </motion.article>
   )
 }
