@@ -1,15 +1,17 @@
 import type { AppItem, BrandMeta, ReviewItem } from '../types/site'
 
+const brandAsset = (fileName: string): string => `${import.meta.env.BASE_URL}brand/${fileName}`
+
 export const brandMeta: BrandMeta = {
   name: 'Ninja Kenshi Apps',
-  logo: '/brand/ninja-kenshi-logo.png',
+  logo: brandAsset('ninja-kenshi-logo.png'),
 }
 
 export const appItems: AppItem[] = [
   {
     id: 'maia-pos',
     name: 'MAIA POS',
-    logo: '/brand/maia-pos-logo.png',
+    logo: brandAsset('maia-pos-logo.png'),
     tagline: 'Sistema de punto de venta profesional para comercios y emprendedores.',
     description:
       'POS multiplataforma para Windows y Android con ventas, inventario, clientes, reportes y licenciamiento SaaS. Diseñado para rendimiento alto en mostrador y dispositivos moviles.',
@@ -100,7 +102,7 @@ export const appItems: AppItem[] = [
   {
     id: 'costcalc-pro',
     name: 'CostCalc Pro Plus',
-    logo: '/brand/costcalc-pro-logo.png',
+    logo: brandAsset('costcalc-pro-logo.png'),
     tagline: 'Calculadora de costos profesional para gastronomia y emprendimientos.',
     description:
       'Calcula costo por unidad con recetas, materias primas y gastos generales. Funciona offline y genera reportes PDF con datos listos para decision comercial.',
