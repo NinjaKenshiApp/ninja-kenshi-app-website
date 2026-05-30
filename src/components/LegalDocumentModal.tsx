@@ -1,15 +1,24 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useMemo, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
+import rehypeRaw from 'rehype-raw'
 import remarkGfm from 'remark-gfm'
 import { legalDocumentBySlug } from '../utils/legalDocs'
 
 interface LegalDocumentModalProps {
   slug: string | null
   onClose: () => void
+  onOpenLegal: (nextSlug: string) => void
 }
 
-export function LegalDocumentModal({ slug, onClose }: LegalDocumentModalProps) {
+const markdownLegalAliases: Record<string, string> = {
+  './TERMINOS.md': 'maia-pos-terminos',
+  './PRIVACIDAD.md': 'maia-pos-privacidad',
+  './Readme_Maia-Pos.md': 'maia-pos-documentacion',
+  './Readme_CostCalcProPlus.md': 'costcalc-pro-documentacion',
+}
+
+export function LegalDocumentModal({ slug, onClose, onOpenLegal }: LegalDocumentModalProps) {
   const legalDoc = useMemo(() => (slug ? legalDocumentBySlug.get(slug) ?? null : null), [slug])
   const [markdown, setMarkdown] = useState('')
   const [status, setStatus] = useState<'idle' | 'loading' | 'ready' | 'error'>('idle')
@@ -129,7 +138,38 @@ export function LegalDocumentModal({ slug, onClose }: LegalDocumentModalProps) {
 
           {status === 'ready' ? (
             <article className="legal-content">
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>{markdown}</ReactMarkdown>
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                rehypePlugins={[rehypeRaw]}
+                components={{
+                  a: ({ href = '', children, ...props }) => {
+                    const internalSlug = markdownLegalAliases[href]
+
+                    if (internalSlug) {
+                      return (
+                        <a
+                          href={`?legal=${internalSlug}`}
+                          {...props}
+                          onClick={(event) => {
+                            event.preventDefault()
+                            onOpenLegal(internalSlug)
+                          }}
+                        >
+                          {children}
+                        </a>
+                      )
+                    }
+
+                    return (
+                      <a href={href} target="_blank" rel="noopener noreferrer" {...props}>
+                        {children}
+                      </a>
+                    )
+                  },
+                }}
+              >
+                {markdown}
+              </ReactMarkdown>
             </article>
           ) : null}
         </motion.dialog>

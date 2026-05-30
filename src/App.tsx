@@ -105,7 +105,7 @@ function App() {
       <SiteFooter />
       <AppModal app={activeApp} onClose={() => setActiveApp(null)} onOpenLegal={openLegalDocument} />
       <Suspense fallback={null}>
-        <LegalDocumentModal slug={activeLegalSlug} onClose={closeLegalDocument} />
+        <LegalDocumentModal slug={activeLegalSlug} onClose={closeLegalDocument} onOpenLegal={openLegalDocument} />
       </Suspense>
     </div>
   )
