@@ -30,14 +30,6 @@ export function AppCard({ app, onOpen }: AppCardProps) {
       <h3>{app.name}</h3>
       <p className="app-tagline">{app.tagline}</p>
 
-      <ul className="chip-row" aria-label={`Tecnologias de ${app.name}`}>
-        {app.tech.slice(0, 3).map((tech) => (
-          <li key={tech} className="chip">
-            {tech}
-          </li>
-        ))}
-      </ul>
-
       <button
         type="button"
         className="button button-primary app-open"

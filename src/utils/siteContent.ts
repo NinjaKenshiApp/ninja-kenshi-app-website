@@ -87,10 +87,8 @@ export const appItems: AppItem[] = [
       },
     ],
     security: [
-      'Autenticacion con OTP por email sin contrasenas almacenadas',
-      'Datos operativos en local con IndexedDB para trabajo offline',
-      'Licencias validadas criptograficamente con HMAC-SHA256',
-      'Hasta 3 dispositivos por suscripcion activa (sin sincronizacion de datos en tiempo real entre dispositivos)',
+      'Acceso seguro con verificacion por email.',
+      'Los datos de trabajo se guardan localmente en tu dispositivo.',
     ],
     legalLinks: [
       { label: 'Política de Privacidad', href: 'https://github.com/NinjaKenshiApp/Ninja-Kenshi-Apps/blob/master/Politica_Privacidad_Maia-POS.md' },
