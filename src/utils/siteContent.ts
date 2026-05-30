@@ -61,12 +61,12 @@ export const appItems: AppItem[] = [
       },
       {
         name: 'Mensual',
-        price: '$10.000 ARS / mes',
+        price: '$9.900 ARS / mes',
         description: 'Renovacion automatica con facturacion mensual.',
       },
       {
         name: 'Anual',
-        price: '$60.000 ARS / ano',
+        price: '$59.000 ARS / ano',
         description: '50% de ahorro frente al plan mensual.',
       },
     ],
@@ -90,7 +90,7 @@ export const appItems: AppItem[] = [
       'Autenticacion con OTP por email sin contrasenas almacenadas',
       'Datos operativos en local con IndexedDB para trabajo offline',
       'Licencias validadas criptograficamente con HMAC-SHA256',
-      'Hasta 3 dispositivos por suscripcion activa',
+      'Hasta 3 dispositivos por suscripcion activa (sin sincronizacion de datos en tiempo real entre dispositivos)',
     ],
     legalLinks: [
       { label: 'Política de Privacidad', href: 'https://github.com/NinjaKenshiApp/Ninja-Kenshi-Apps/blob/master/Politica_Privacidad_Maia-POS.md' },
@@ -136,17 +136,10 @@ export const appItems: AppItem[] = [
     platforms: [
       {
         name: 'Android',
-        tech: 'APK nativa',
-        requirement: 'Disponible via APK y futura publicacion en Play Store',
-        downloadUrl: 'https://github.com/NinjaKenshiApp/Ninja-Kenshi-Apps/releases/latest/download/costcalc-pro-plus-android.apk',
-        downloadLabel: 'Descargar Android',
-      },
-      {
-        name: 'Desktop',
-        tech: 'Build de escritorio',
-        requirement: 'Soporte de desarrollo para plataformas de escritorio',
-        downloadUrl: 'https://github.com/NinjaKenshiApp/Ninja-Kenshi-Apps/releases/latest/download/costcalc-pro-plus-windows.exe',
-        downloadLabel: 'Descargar Windows',
+        tech: 'Google Play',
+        requirement: 'Disponible exclusivamente en Android desde Google Play',
+        downloadUrl: 'https://play.google.com/store/apps/details?id=com.ninjakenshiapp.costcalcproplus&hl=es_AR',
+        downloadLabel: 'Descargar en Google Play',
       },
     ],
     legalLinks: [

@@ -20,7 +20,7 @@ const faqItems = [
   {
     question: '¿Puedo usar las apps en varios dispositivos?',
     answer:
-      'Sí. MAIA POS por ejemplo admite hasta 3 dispositivos simultáneos por suscripción activa, entre Windows y Android. Así podés tener el mostrador y el celular sincronizados.',
+      'Sí. MAIA POS por ejemplo admite hasta 3 dispositivos simultáneos por suscripción activa, entre Windows y Android. La licencia se valida en esos equipos, pero los datos no se sincronizan en tiempo real entre dispositivos.',
   },
   {
     question: '¿Las apps funcionan sin conexión a internet?',
