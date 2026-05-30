@@ -9,6 +9,7 @@ interface LegalDocumentModalProps {
   slug: string | null
   onClose: () => void
   onOpenLegal: (nextSlug: string) => void
+  canReturnToApp?: boolean
 }
 
 const markdownLegalAliases: Record<string, string> = {
@@ -18,7 +19,7 @@ const markdownLegalAliases: Record<string, string> = {
   './Readme_CostCalcProPlus.md': 'costcalc-pro-documentacion',
 }
 
-export function LegalDocumentModal({ slug, onClose, onOpenLegal }: LegalDocumentModalProps) {
+export function LegalDocumentModal({ slug, onClose, onOpenLegal, canReturnToApp = false }: LegalDocumentModalProps) {
   const legalDoc = useMemo(() => (slug ? legalDocumentBySlug.get(slug) ?? null : null), [slug])
   const [markdown, setMarkdown] = useState('')
   const [status, setStatus] = useState<'idle' | 'loading' | 'ready' | 'error'>('idle')
@@ -124,6 +125,11 @@ export function LegalDocumentModal({ slug, onClose, onOpenLegal }: LegalDocument
           </header>
 
           <div className="modal-actions legal-actions">
+            {canReturnToApp ? (
+              <button type="button" className="button button-primary" onClick={onClose}>
+                Volver al detalle
+              </button>
+            ) : null}
             <a href={legalDoc.sourceUrl} target="_blank" rel="noopener noreferrer" className="button button-ghost">
               Ver fuente en GitHub
             </a>

@@ -1,4 +1,6 @@
 import { motion } from 'framer-motion'
+import { FaWhatsapp } from 'react-icons/fa'
+import { FiInstagram, FiMail } from 'react-icons/fi'
 import { SectionHeading } from './SectionHeading'
 
 /*
@@ -16,25 +18,39 @@ export function ContactSection() {
       />
 
       <motion.div
-        className="contact-panel"
+        className="contact-panel contact-links"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.45 }}
       >
         <a
+          href="https://wa.me/5491156322591?text=Hola%21%20Quiero%20saber%20m%C3%A1s%20sobre%20las%20apps%20de%20Ninja%20Kenshi."
+          target="_blank"
+          rel="noopener noreferrer"
+          className="contact-link"
+          aria-label="WhatsApp"
+        >
+          <FaWhatsapp aria-hidden="true" />
+          <span>WhatsApp</span>
+        </a>
+        <a
           href="https://instagram.com/elninjakenshi.app"
           target="_blank"
           rel="noopener noreferrer"
-          className="button button-primary"
+          className="contact-link"
+          aria-label="Instagram"
         >
-          Hablar por Instagram
+          <FiInstagram aria-hidden="true" />
+          <span>Instagram</span>
         </a>
         <a
           href="mailto:elninjakenshi.app@gmail.com?subject=Consulta%20sobre%20una%20app"
-          className="button button-ghost"
+          className="contact-link"
+          aria-label="Email"
         >
-          Enviar un email
+          <FiMail aria-hidden="true" />
+          <span>Email</span>
         </a>
       </motion.div>
     </section>

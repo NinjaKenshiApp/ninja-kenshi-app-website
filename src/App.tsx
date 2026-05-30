@@ -6,7 +6,6 @@ import { AppsShowcase } from './components/AppsShowcase'
 import { ContactSection } from './components/ContactSection'
 import { FaqSection } from './components/FaqSection'
 import { HeroIntro } from './components/HeroIntro'
-import { LegalSection } from './components/LegalSection'
 import { ReviewsCarousel } from './components/ReviewsCarousel'
 import { SiteFooter } from './components/SiteFooter'
 import { TopNav } from './components/TopNav'
@@ -76,7 +75,6 @@ function App() {
     const nextUrl = new URL(window.location.href)
     nextUrl.searchParams.set('legal', slug)
     window.history.pushState({}, '', nextUrl)
-    setActiveApp(null)
     setActiveLegalSlug(slug)
   }
 
@@ -96,7 +94,6 @@ function App() {
         <HeroIntro />
         <AboutSection />
         <AppsShowcase onOpenApp={setActiveApp} />
-        <LegalSection onOpenLegal={openLegalDocument} />
         <ReviewsCarousel />
         <FaqSection />
         <ContactSection />
@@ -105,7 +102,12 @@ function App() {
       <SiteFooter />
       <AppModal app={activeApp} onClose={() => setActiveApp(null)} onOpenLegal={openLegalDocument} />
       <Suspense fallback={null}>
-        <LegalDocumentModal slug={activeLegalSlug} onClose={closeLegalDocument} onOpenLegal={openLegalDocument} />
+        <LegalDocumentModal
+          slug={activeLegalSlug}
+          onClose={closeLegalDocument}
+          onOpenLegal={openLegalDocument}
+          canReturnToApp={Boolean(activeApp)}
+        />
       </Suspense>
     </div>
   )
