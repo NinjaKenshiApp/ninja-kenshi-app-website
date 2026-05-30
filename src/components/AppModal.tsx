@@ -47,6 +47,7 @@ function ComingSoonAnimation({ name }: { name: string }) {
 interface AppModalProps {
   app: AppItem | null
   onClose: () => void
+  onOpenLegal: (slug: string) => void
 }
 
 /*
@@ -54,7 +55,7 @@ Purpose: Rich modal with full app details and actions.
 Key dependencies: framer-motion for presence transitions.
 Integration: Controlled by App selected state from top-level App.
 */
-export function AppModal({ app, onClose }: AppModalProps) {
+export function AppModal({ app, onClose, onOpenLegal }: AppModalProps) {
   useEffect(() => {
     if (!app) {
       return
@@ -215,9 +216,14 @@ export function AppModal({ app, onClose }: AppModalProps) {
                     <h4>Documentacion legal</h4>
                     <div className="modal-actions">
                       {app.legalLinks.map((legal) => (
-                        <a key={legal.label} href={legal.href} className="button button-ghost" target="_blank" rel="noopener noreferrer">
+                        <button
+                          key={legal.label}
+                          type="button"
+                          className="button button-ghost"
+                          onClick={() => onOpenLegal(legal.href)}
+                        >
                           {legal.label}
-                        </a>
+                        </button>
                       ))}
                     </div>
                   </>

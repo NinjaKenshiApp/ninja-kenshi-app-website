@@ -20,6 +20,7 @@ export function TopNav({ theme, onToggleTheme }: TopNavProps) {
       <nav className="top-links">
         <a href="#nosotros">Nosotros</a>
         <a href="#apps">Apps</a>
+        <a href="#legal">Legal</a>
         <a href="#resenas">Resultados</a>
         <a href="#faqs">FAQs</a>
         <a href="#contacto">Contacto</a>

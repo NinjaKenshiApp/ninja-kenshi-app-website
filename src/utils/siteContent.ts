@@ -91,9 +91,9 @@ export const appItems: AppItem[] = [
       'Los datos de trabajo se guardan localmente en tu dispositivo.',
     ],
     legalLinks: [
-      { label: 'Política de Privacidad', href: 'https://github.com/NinjaKenshiApp/Ninja-Kenshi-Apps/blob/master/Politica_Privacidad_Maia-POS.md' },
-      { label: 'Términos de Servicio', href: 'https://github.com/NinjaKenshiApp/Ninja-Kenshi-Apps/blob/master/terminos_Maia-Pos.md' },
-      { label: 'README / Documentación', href: 'https://github.com/NinjaKenshiApp/Ninja-Kenshi-Apps/blob/master/Readme_Maia-Pos.md' },
+      { label: 'Politica de Privacidad', href: 'maia-pos-privacidad' },
+      { label: 'Terminos de Servicio', href: 'maia-pos-terminos' },
+      { label: 'README / Documentacion', href: 'maia-pos-documentacion' },
     ],
     supportEmail: 'elninjakenshi.app@gmail.com',
   },
@@ -142,8 +142,8 @@ export const appItems: AppItem[] = [
     ],
     legalLinks: [
       {
-        label: 'README / Documentación',
-        href: 'https://github.com/NinjaKenshiApp/Ninja-Kenshi-Apps/blob/master/Readme_CostCalcProPlus.md',
+        label: 'README / Documentacion',
+        href: 'costcalc-pro-documentacion',
       },
     ],
     supportEmail: 'elninjakenshi.app@gmail.com',
