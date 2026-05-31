@@ -12,6 +12,8 @@ dist
 dist-ssr
 *.local
 Ninja-Kenshi-Apps/
+release-assets/**/*.exe
+release-assets/**/*.apk
 
 # Editor directories and files
 .vscode/*
