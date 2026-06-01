@@ -1,0 +1,143 @@
+.cinematic-background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 18%, #101010 0%, #090909 42%, #050505 100%);
+}
+
+.cinematic-background.is-intro-active {
+  z-index: 220;
+  pointer-events: auto;
+}
+
+.cinematic-background__canvas,
+.cinematic-background__veil,
+.cinematic-background__content-guard {
+  position: absolute;
+  inset: 0;
+}
+
+.cinematic-background__canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  filter: saturate(1.02) brightness(0.98) contrast(1.01);
+}
+
+.cinematic-background.is-intro-active .cinematic-background__canvas {
+  filter: saturate(1.18) brightness(1.18) contrast(1.08);
+}
+
+.cinematic-background__veil {
+  background:
+    radial-gradient(circle at 50% 40%, rgba(255, 194, 77, 0.12), transparent 32%),
+    radial-gradient(circle at 15% 50%, rgba(255, 194, 77, 0.05), transparent 32%),
+    radial-gradient(circle at 85% 52%, rgba(255, 128, 0, 0.05), transparent 34%),
+    linear-gradient(180deg, rgba(5, 5, 5, 0.02), rgba(5, 5, 5, 0.12));
+}
+
+.cinematic-background__content-guard {
+  background:
+    linear-gradient(90deg, rgba(5, 5, 5, 0.42), rgba(5, 5, 5, 0) 18%, rgba(5, 5, 5, 0) 82%, rgba(5, 5, 5, 0.42)),
+    radial-gradient(circle at 50% 24%, rgba(255, 215, 0, 0.03), transparent 24%);
+}
+
+.cinematic-background.is-intro-active .cinematic-background__content-guard {
+  background: none;
+}
+
+.cinematic-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 160;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 1.5rem 1.5rem max(8vh, 3rem);
+  text-align: center;
+  pointer-events: auto;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(255, 215, 0, 0.1), transparent 18%),
+    radial-gradient(circle at 50% 34%, rgba(255, 150, 46, 0.06), transparent 28%),
+    linear-gradient(180deg, rgba(5, 5, 5, 0.04) 0%, rgba(5, 5, 5, 0.04) 48%, rgba(5, 5, 5, 0.64) 100%);
+}
+
+.cinematic-loader__copy {
+  width: min(560px, 100%);
+  padding: clamp(0.95rem, 2vw, 1.35rem);
+  border: 1px solid rgba(255, 215, 0, 0.18);
+  border-radius: 1.25rem;
+  background: linear-gradient(160deg, rgba(20, 20, 20, 0.14), rgba(8, 8, 8, 0.06));
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.24);
+}
+
+.cinematic-loader__eyebrow {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.84);
+  font-size: clamp(0.8rem, 1.2vw, 1rem);
+  font-weight: 800;
+  letter-spacing: 0.36rem;
+  text-transform: uppercase;
+}
+
+.cinematic-loader__title {
+  margin: 0.9rem 0 0;
+  font-family: 'Prata', serif;
+  font-size: clamp(2rem, 5vw, 4.6rem);
+  line-height: 1.02;
+  letter-spacing: 0.08rem;
+  color: #fff9e6;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 12px rgba(255, 215, 0, 0.32),
+    0 0 34px rgba(255, 136, 0, 0.18);
+  animation: cinematic-loader-glow 2.8s ease-in-out infinite alternate;
+}
+
+.cinematic-loader__meter {
+  width: min(360px, calc(100% - 1rem));
+  height: 2px;
+  margin: 0.95rem auto 0;
+  background: rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+}
+
+.cinematic-loader__meter > span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform-origin: left center;
+  background: linear-gradient(90deg, rgba(255, 215, 0, 0), rgba(255, 215, 0, 0.98), rgba(255, 247, 220, 0.92));
+  box-shadow: 0 0 18px rgba(255, 215, 0, 0.45);
+}
+
+@keyframes cinematic-loader-glow {
+  from {
+    text-shadow:
+      0 0 12px rgba(255, 215, 0, 0.32),
+      0 0 28px rgba(255, 136, 0, 0.16);
+  }
+  to {
+    text-shadow:
+      0 0 16px rgba(255, 225, 160, 0.42),
+      0 0 42px rgba(255, 146, 45, 0.24);
+  }
+}
+
+@media (max-width: 900px) {
+  .cinematic-background__canvas {
+    filter: saturate(1.04) brightness(0.94) contrast(1.04);
+  }
+
+  .cinematic-loader__eyebrow {
+    letter-spacing: 0.24rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cinematic-loader__title {
+    animation: none;
+  }
+}

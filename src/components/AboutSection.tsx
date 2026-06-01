@@ -27,7 +27,7 @@ export function AboutSection() {
       <SectionHeading
         eyebrow="Nosotros"
         title="Construimos apps con criterio de negocio, diseño y ejecucion"
-        subtitle="Ninja Kenshi Apps combina estrategia de producto y desarrollo agil para transformar procesos complejos en experiencias simples."
+        subtitle="El Ninja Kenshi APP combina estrategia de producto y desarrollo agil para transformar procesos complejos en experiencias simples y memorables."
       />
 
       <div className="about-grid">

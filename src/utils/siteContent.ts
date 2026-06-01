@@ -3,7 +3,7 @@ import type { AppItem, BrandMeta, ReviewItem } from '../types/site'
 const brandAsset = (fileName: string): string => `${import.meta.env.BASE_URL}brand/${fileName}`
 
 export const brandMeta: BrandMeta = {
-  name: 'Ninja Kenshi Apps',
+  name: 'El Ninja Kenshi APP',
   logo: brandAsset('ninja-kenshi-logo.png'),
 }
 
@@ -237,7 +237,7 @@ export const reviews: ReviewItem[] = [
   {
     id: 'r10',
     author: 'Hector D.',
-    role: 'Carniceria',
+    role: 'Dietetica',
     quote:
       'La venta por peso y las unidades de medida simplifican todo. Cero errores de calculo.',
     rating: 5,

@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { FiArrowUpRight } from 'react-icons/fi'
 import type { AppItem } from '../types/site'
 
@@ -13,13 +13,14 @@ Key dependencies: framer-motion for subtle hover/tap transitions.
 Integration: Rendered by AppsShowcase grid.
 */
 export function AppCard({ app, onOpen }: AppCardProps) {
+  const reduceMotion = useReducedMotion()
+
   return (
     <motion.article
-      layout
-      initial={{ opacity: 0, y: 18 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+      whileInView={reduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.4 }}
+      transition={{ duration: reduceMotion ? 0.2 : 0.38 }}
       className="app-card"
     >
       {app.logo ? (

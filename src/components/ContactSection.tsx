@@ -25,9 +25,10 @@ export function ContactSection() {
         transition={{ duration: 0.45 }}
       >
         <a
-          href="https://wa.me/5491156322591?text=Hola%21%20Quiero%20saber%20m%C3%A1s%20sobre%20las%20apps%20de%20Ninja%20Kenshi."
+          href="https://wa.me/5491156322591?text=Hola%21%20Quiero%20saber%20m%C3%A1s%20sobre%20El%20Ninja%20Kenshi%20APP."
           target="_blank"
-          rel="noopener noreferrer"
+          rel="noopener noreferrer nofollow external"
+          referrerPolicy="no-referrer"
           className="contact-link"
           aria-label="WhatsApp"
         >
@@ -37,7 +38,8 @@ export function ContactSection() {
         <a
           href="https://instagram.com/elninjakenshi.app"
           target="_blank"
-          rel="noopener noreferrer"
+          rel="noopener noreferrer nofollow external"
+          referrerPolicy="no-referrer"
           className="contact-link"
           aria-label="Instagram"
         >

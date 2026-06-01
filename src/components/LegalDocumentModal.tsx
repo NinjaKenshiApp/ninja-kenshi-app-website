@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { useEffect, useMemo, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
@@ -20,6 +20,7 @@ const markdownLegalAliases: Record<string, string> = {
 }
 
 export function LegalDocumentModal({ slug, onClose, onOpenLegal, canReturnToApp = false }: LegalDocumentModalProps) {
+  const reduceMotion = useReducedMotion()
   const legalDoc = useMemo(() => (slug ? legalDocumentBySlug.get(slug) ?? null : null), [slug])
   const [markdown, setMarkdown] = useState('')
   const [status, setStatus] = useState<'idle' | 'loading' | 'ready' | 'error'>('idle')
@@ -105,10 +106,10 @@ export function LegalDocumentModal({ slug, onClose, onOpenLegal, canReturnToApp 
       >
         <motion.dialog
           className="app-modal legal-modal"
-          initial={{ opacity: 0, y: 28, scale: 0.98 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: 20, scale: 0.98 }}
-          transition={{ duration: 0.24 }}
+          initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 28, scale: 0.98 }}
+          animate={reduceMotion ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }}
+          exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 20, scale: 0.98 }}
+          transition={{ duration: reduceMotion ? 0.15 : 0.24 }}
           open
           aria-labelledby="legal-modal-title"
           onClick={(event) => event.stopPropagation()}
@@ -130,7 +131,13 @@ export function LegalDocumentModal({ slug, onClose, onOpenLegal, canReturnToApp 
                 Volver al detalle
               </button>
             ) : null}
-            <a href={legalDoc.sourceUrl} target="_blank" rel="noopener noreferrer" className="button button-ghost">
+            <a
+              href={legalDoc.sourceUrl}
+              target="_blank"
+              rel="noopener noreferrer nofollow external"
+              referrerPolicy="no-referrer"
+              className="button button-ghost"
+            >
               Ver fuente en GitHub
             </a>
           </div>
@@ -167,7 +174,13 @@ export function LegalDocumentModal({ slug, onClose, onOpenLegal, canReturnToApp 
                     }
 
                     return (
-                      <a href={href} target="_blank" rel="noopener noreferrer" {...props}>
+                      <a
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer nofollow external"
+                        referrerPolicy="no-referrer"
+                        {...props}
+                      >
                         {children}
                       </a>
                     )

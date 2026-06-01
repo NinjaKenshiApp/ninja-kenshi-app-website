@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import type { AppItem } from '../types/site'
 import { appItems } from '../utils/siteContent'
 import { AppCard } from './AppCard'
@@ -14,6 +14,8 @@ Key dependencies: framer-motion for staggered reveal, local app content data.
 Integration: Receives modal opener callback from App container.
 */
 export function AppsShowcase({ onOpenApp }: AppsShowcaseProps) {
+  const reduceMotion = useReducedMotion()
+
   return (
     <section className="apps-section" id="apps" aria-labelledby="apps-title">
       <SectionHeading
@@ -30,7 +32,7 @@ export function AppsShowcase({ onOpenApp }: AppsShowcaseProps) {
         variants={{
           hidden: {},
           visible: {
-            transition: { staggerChildren: 0.08 },
+            transition: { staggerChildren: reduceMotion ? 0 : 0.05 },
           },
         }}
       >

@@ -1,26 +1,32 @@
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { FiDownload } from 'react-icons/fi'
 import { useEffect } from 'react'
 import type { AppItem } from '../types/site'
 
 function ComingSoonAnimation({ name }: { name: string }) {
+  const reduceMotion = useReducedMotion()
+
   return (
     <div className="coming-soon-wrap">
       <motion.div
         className="coming-orb"
-        animate={{
-          scale: [1, 1.18, 1, 1.08, 1],
-          opacity: [0.6, 1, 0.6, 0.88, 0.6],
-        }}
-        transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut' }}
+        animate={
+          reduceMotion
+            ? { opacity: 1 }
+            : {
+                scale: [1, 1.18, 1, 1.08, 1],
+                opacity: [0.6, 1, 0.6, 0.88, 0.6],
+              }
+        }
+        transition={reduceMotion ? undefined : { duration: 3.2, repeat: Infinity, ease: 'easeInOut' }}
       />
       <motion.div className="coming-rings">
         {[0, 1, 2].map((i) => (
           <motion.span
             key={i}
             className="coming-ring"
-            animate={{ scale: [1, 2.2], opacity: [0.5, 0] }}
-            transition={{ duration: 2.2, repeat: Infinity, ease: 'easeOut', delay: i * 0.75 }}
+            animate={reduceMotion ? undefined : { scale: [1, 2.2], opacity: [0.5, 0] }}
+            transition={reduceMotion ? undefined : { duration: 2.2, repeat: Infinity, ease: 'easeOut', delay: i * 0.75 }}
           />
         ))}
       </motion.div>
@@ -38,7 +44,7 @@ function ComingSoonAnimation({ name }: { name: string }) {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.4, delay: 0.4 }}
       >
-        {name} está en camino. Seguí de cerca los lanzamientos de Ninja Kenshi Apps.
+        {name} está en camino. Seguí de cerca los lanzamientos de El Ninja Kenshi APP.
       </motion.p>
     </div>
   )
@@ -56,6 +62,8 @@ Key dependencies: framer-motion for presence transitions.
 Integration: Controlled by App selected state from top-level App.
 */
 export function AppModal({ app, onClose, onOpenLegal }: AppModalProps) {
+  const reduceMotion = useReducedMotion()
+
   useEffect(() => {
     if (!app) {
       return
@@ -99,10 +107,10 @@ export function AppModal({ app, onClose, onOpenLegal }: AppModalProps) {
           role="presentation"
         >
           <motion.dialog
-            initial={{ opacity: 0, y: 28, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.98 }}
-            transition={{ duration: 0.24 }}
+            initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 28, scale: 0.98 }}
+            animate={reduceMotion ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }}
+            exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 20, scale: 0.98 }}
+            transition={{ duration: reduceMotion ? 0.15 : 0.24 }}
             className="app-modal"
             open
             aria-labelledby="app-modal-title"
@@ -188,7 +196,8 @@ export function AppModal({ app, onClose, onOpenLegal }: AppModalProps) {
                               href={platform.downloadUrl}
                               className="button button-primary platform-download"
                               target="_blank"
-                              rel="noopener noreferrer"
+                              rel="noopener noreferrer nofollow external"
+                              referrerPolicy="no-referrer"
                             >
                               <FiDownload aria-hidden="true" />
                               {platform.downloadLabel ?? 'Descargar'}
@@ -234,12 +243,24 @@ export function AppModal({ app, onClose, onOpenLegal }: AppModalProps) {
                 {app.repoUrl || app.storeUrl ? (
                   <div className="modal-actions">
                     {app.storeUrl ? (
-                      <a href={app.storeUrl} className="button button-primary" target="_blank" rel="noopener noreferrer">
+                      <a
+                        href={app.storeUrl}
+                        className="button button-primary"
+                        target="_blank"
+                        rel="noopener noreferrer nofollow external"
+                        referrerPolicy="no-referrer"
+                      >
                         Ver app
                       </a>
                     ) : null}
                     {app.repoUrl ? (
-                      <a href={app.repoUrl} className="button button-ghost" target="_blank" rel="noopener noreferrer">
+                      <a
+                        href={app.repoUrl}
+                        className="button button-ghost"
+                        target="_blank"
+                        rel="noopener noreferrer nofollow external"
+                        referrerPolicy="no-referrer"
+                      >
                         Documentación
                       </a>
                     ) : null}

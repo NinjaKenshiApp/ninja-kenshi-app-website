@@ -1,0 +1,1 @@
+# Release assets\n\nCarpeta temporal para binarios antes de subir a GitHub Releases.\n\n## Convenciones\n\n- Windows MAIA POS: `release-assets/windows/maia-pos-windows.exe`\n- Android MAIA POS: `release-assets/android/maia-pos-android.apk`\n\n## Nota\n\nEstos binarios no deben versionarse en git. Se usan solo para publicar en Releases.\n

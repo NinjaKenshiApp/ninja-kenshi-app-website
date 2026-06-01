@@ -1,4 +1,4 @@
-﻿import { AnimatePresence, motion } from 'framer-motion'
+﻿import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { useCallback, useEffect, useState } from 'react'
 import { reviews } from '../utils/siteContent'
 import { SectionHeading } from './SectionHeading'
@@ -9,6 +9,7 @@ Key dependencies: framer-motion for slide transitions.
 Integration: Rendered as one-page section after apps showcase.
 */
 export function ReviewsCarousel() {
+  const reduceMotion = useReducedMotion()
   const [index, setIndex] = useState(0)
   const [isAutoPaused, setIsAutoPaused] = useState(false)
 
@@ -22,25 +23,25 @@ export function ReviewsCarousel() {
   }, [])
 
   useEffect(() => {
-    if (isAutoPaused) {
+    if (isAutoPaused || reduceMotion) {
       return
     }
 
     const timer = window.setInterval(() => {
       move(1)
-    }, 4200)
+    }, 5200)
 
     return () => {
       window.clearInterval(timer)
     }
-  }, [isAutoPaused, move])
+  }, [isAutoPaused, move, reduceMotion])
 
   return (
     <section className="reviews-section" id="resenas" aria-labelledby="resenas-title">
       <SectionHeading
         eyebrow="Impacto"
         title="Clientes reales, mejoras reales"
-        subtitle="Historias de negocios que ordenaron su operacion y aumentaron resultados con Ninja Kenshi Apps."
+        subtitle="Historias de negocios que ordenaron su operacion y aumentaron resultados con El Ninja Kenshi APP."
       />
 
       <div
@@ -63,10 +64,10 @@ export function ReviewsCarousel() {
           <motion.article
             key={review.id}
             className="review-card"
-            initial={{ opacity: 0, x: 22 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -22 }}
-            transition={{ duration: 0.28 }}
+            initial={reduceMotion ? { opacity: 0 } : { opacity: 0, x: 16 }}
+            animate={reduceMotion ? { opacity: 1 } : { opacity: 1, x: 0 }}
+            exit={reduceMotion ? { opacity: 0 } : { opacity: 0, x: -16 }}
+            transition={{ duration: reduceMotion ? 0.2 : 0.24 }}
           >
             <p className="review-quote">&ldquo;{review.quote}&rdquo;</p>
             <p className="review-author">{review.author}</p>
