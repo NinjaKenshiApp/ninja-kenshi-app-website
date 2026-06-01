@@ -9,6 +9,8 @@ interface CinematicBackgroundProps {
   className?: string
 }
 
+const DEFAULT_IMAGE_SRC = `${import.meta.env.BASE_URL}brand/ninja-kenshi-logo.png`
+
 const createFallbackSnapshot = (): LoaderSnapshot => ({
   elapsedMs: 0,
   characterProgress: 0,
@@ -27,7 +29,7 @@ Purpose: React bridge that mounts the permanent cinematic canvas and keeps the l
 Key dependencies: BackgroundEngine for rendering and AppLoader for copy/timeline presentation.
 Integration: Mounted once at the top of App so the launcher background persists beneath every section and modal.
 */
-export function CinematicBackground({ imageSrc = '/brand/ninja-kenshi-logo.png', className }: CinematicBackgroundProps) {
+export function CinematicBackground({ imageSrc = DEFAULT_IMAGE_SRC, className }: CinematicBackgroundProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const engineRef = useRef<BackgroundEngine | null>(null)
   const loaderManagerRef = useRef<LoaderManager | null>(null)
